@@ -1,14 +1,14 @@
 return {
+  -- { require("plugins.themes.vscode") },
+  { require("plugins.themes.catppuccin") },
   -- { "ellisonleao/gruvbox.nvim" },
-
-  { "mofiqul/vscode.nvim" },
 
   -- Configure LazyVim to load a theme
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "vscode",
+      colorscheme = "catppuccin",
+      -- colorscheme = "vscode",
     },
   },
-
 }

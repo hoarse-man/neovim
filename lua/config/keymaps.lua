@@ -11,20 +11,112 @@ local function map(mode, lhs, rhs, opts)
   end
 end
 
--- funct to create prefix names
-local wk = require("which-key")
+local opt = { noremap = true, silent = true }
 
--- vim go
--- lvim.builtin.which_key.mappings["g"] = {
---   name = "Golang (vim-go)",
---   s = { "<cmd>GoFillStruct<cr>", "Go Fill Struct" },
---   t = { "<cmd>GoAddTags<cr>", "Go Add Tags" },
---   T = { "<cmd>GoTest<cr>", "Go Test Function" },
---   e = { "<cmd>GoIfErr<cr>", "Go Auto Generate 'if err" }
--- }
+map("i", "jk", "<esc>l", opt) -- added l when escaped to normal mode as to not make the cursor move back 1 line
+
+-- save global path to "p"
+map("n", "cp", ':let @" = expand("%:p")<cr>""', { noremap = true, silent = true, desc = "Copy path to register" }) -- added l when escaped to normal mode as to not make the cursor move back 1 line
+
+-- NOTE: it should be "_d so uses '' to make the string, else the keymap will not be working
+-- "_* will not save to clipboard.
+map("n", "d", '"_d', opt)
+map("v", "d", '"_d', opt) -- lazyvim dont have x in visual mode, but now it has.
+map("n", "dd", '"_dd', opt)
+
+map("n", "D", '"_D', opt)
+map("n", "x", '"_x', opt)
+
+map("n", "c", '"_c', opt)
+map("v", "c", '"_c', opt)
+map("n", "C", '"_C', opt)
+map("v", "C", '"_C', opt)
+
+-- define which-key below
+local wk = require("which-key") -- pcall not working?
+
+-- dap
+wk.register({ ["<leader>d"] = { name = "+Debug" } })
+map("n", "<leader>ds", "<cmd>lua require'dap'.continue()<cr>", { desc = "Start" })
+map("n", "<leader>dR", "<cmd>lua require'dap'.run_to_cursor()<cr>", { desc = "Run to Cursor" })
+map("n", "<leader>dE", "<cmd>lua require'dapui'.eval(vim.fn.input '[Expression] > ')<cr>", { desc = "Evaluate Input" })
+map(
+  "n",
+  "<leader>dC",
+  "<cmd>lua require'dap'.set_breakpoint(vim.fn.input '[Condition] > ')<cr>",
+  { desc = "Conditional Breakpoint" }
+)
+map("n", "<leader>dU", "<cmd>lua require'dapui'.toggle()<cr>", { desc = "Toggle UI" })
+map("n", "<leader>db", "<cmd>lua require'dap'.step_back()<cr>", { desc = "Step Back" })
+map("n", "<leader>dc", "<cmd>lua require'dap'.continue()<cr>", { desc = "Continue" })
+map("n", "<leader>dd", "<cmd>lua require'dap'.disconnect()<cr>", { desc = "Disconnect" })
+map("n", "<leader>de", "<cmd>lua require'dapui'.eval()<cr>", { desc = "Evaluate" })
+map("n", "<leader>dg", "<cmd>lua require'dap'.session()<cr>", { desc = "Get Session" })
+-- map("n", "<leader>dh", "<cmd>lua require'dap.ui.widgets'.hover()<cr>", { desc = "Hover Variables" }) -- cannot exit using "q". find out more
+map("n", "<leader>di", "<cmd>lua require'dap'.step_into()<cr>", { desc = "Step Into" })
+map("n", "<leader>do", "<cmd>lua require'dap'.step_over()<cr>", { desc = "Step Over" })
+map("n", "<leader>dp", "<cmd>lua require'dap'.pause.toggle()<cr>", { desc = "Pause" })
+map("n", "<leader>dq", "<cmd>lua require'dap'.close()<cr>", { desc = "Quit" })
+map("n", "<leader>dr", "<cmd>lua require'dap'.repl.toggle()<cr>", { desc = "Toggle Repl" })
+map("n", "<leader>dt", "<cmd>lua require'dap'.toggle_breakpoint()<cr>", { desc = "Toggle" })
+map("n", "<leader>dx", "<cmd>lua require'dap'.terminate()<cr>", { desc = "Terminate" })
+map("n", "<leader>du", "<cmd>lua require'dap'.step_out()<cr>", { desc = "Step Out" })
+
+-- map("n", "<leader>dS", "<cmd>lua require'dap.ui.widgets'.scopes()<cr>", { desc = "Scopes" })
+-- open float_element of scopes
+map(
+  "n",
+  "<leader>dS",
+  '<cmd>lua require("dapui").float_element("scopes", { width = 90, height = 100, enter = true, position = "center" })<cr>',
+  { desc = "Toggle Floating Scopes" }
+)
+-- open other float_element
+map(
+  "n",
+  "<leader>do",
+  '<cmd>lua require("dapui").float_element(nil, { width = 90, height = 100, enter = true, position = "center" })<cr>',
+  { desc = "Toggle Other Floating Element" }
+)
+
+map("n", "<leader>sx", require("telescope.builtin").resume, { noremap = true, silent = true, desc = "Resume" })
+
+wk.register({ ["<leader>c"] = { name = "+Code / Lsp" } })
+
+-- map("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<cr>", { desc = "Code Action" })
+map("n", "<leader>cd", "<cmd>Telescope diagnostics bufnr=0 theme=get_ivy<cr>", { desc = "Buffer Diagnostics" })
+map("n", "<leader>cD", "<cmd>Telescope diagnostics<cr>", { desc = "Diagnostics" })
+map("n", "<leader>cf", "<cmd>require('lvim.lsp.utils').format", { desc = "Format" })
+--   f = { , "Format" },
+--   i = { "<cmd>LspInfo<cr>", "Info" },
+--   I = { "<cmd>Mason<cr>", "Mason Info" },
+--   j = {
+--     vim.diagnostic.goto_next,
+--     "Next Diagnostic",
+--   },
+--   k = {
+--     vim.diagnostic.goto_prev,
+--     "Prev Diagnostic",
+--   },
+--   l = { vim.lsp.codelens.run, "CodeLens Action" },
+--   q = { vim.diagnostic.setloclist, "Quickfix" },
+--   r = { vim.lsp.buf.rename, "Rename" },
+--   s = { "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols" },
+--   S = {
+--     "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
+--     "Workspace Symbols",
+--   },
+--   e = { "<cmd>Telescope quickfix<cr>", "Telescope Quickfix" },
+-- },
+
+wk.register({ ["<leader>cg"] = { name = "+vim-go" } })
+
+map("n", "<leader>cgs", "<cmd>GoFillStruct<cr>", { desc = "Go Fill Struct" })
+map("n", "<leader>cgt", "<cmd>GoAddTags<cr>", { desc = "Go Add Tags" })
+map("n", "<leader>cgT", "<cmd>GoTest<cr>", { desc = "Go Test Function" })
+map("n", "<leader>cge", "<cmd>GoIfErr<cr>", { desc = "Go Auto Generate if err" })
 
 -- lazy
-map("n", "<leader>L", "<cmd>:Lazy<cr>", { desc = "Lazy" })
+-- map("n", "<leader>L", "<cmd>:Lazy<cr>", { desc = "Lazy" })
 
 -- harpoon
 wk.register({ ["<leader>h"] = { name = "+Harpoon" } })
@@ -33,9 +125,6 @@ map("n", "<leader>ht", "<cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>",
 map("n", "<leader>hn", "<cmd>lua require('harpoon.ui').nav_next()<cr>", { desc = "Go to next" })
 map("n", "<leader>hp", "<cmd>lua require('harpoon.ui').nav_prev<cr>", { desc = "Go to previous" }) -- FIX: not working?
 
---
--- p = { "<cmd>lua require('harpoon.ui').nav_prev<cr>", "Go to previous" },
---   a = { "<cmd>lua require('harpoon.ui').nav_file(1)<cr>", "Go to file 1" },
---   b = { "<cmd>lua require('harpoon.ui').nav_file(2)<cr>", "Go to file 2" },
---   c = { "<cmd>lua require('harpoon.ui').nav_file(3)<cr>", "Go to file 3" },
---   d = { "<cmd>lua require('harpoon.ui').nav_file(4)<cr>", "Go to file 4" },
+-- other keymaps
+map("n", "<leader>H", "<cmd>nohlsearch<CR>", { desc = "No Highlight" })
+map("n", "<leader>r", "<cmd>LspRestart<CR>", { desc = "Restart Lsp" })

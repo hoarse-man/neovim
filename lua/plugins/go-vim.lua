@@ -13,12 +13,13 @@ M.setup = function()
   end
 end
 
-
 return {
-  { "fatih/vim-go",
+  {
+    "fatih/vim-go",
     config = function()
       M.setup()
     end,
-    -- event = "BufEnter *.go",
+    event = "VeryLazy", -- use this instead to save 1-2ms to lazyload vim-go. and enabling go-vim commands unlike below which go-vim cannot call the commands at all.
+    -- ft = { "*.go", "go.sum", "go.mod" }, -- cannot use vim-go commands using this way
   },
 }
