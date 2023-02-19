@@ -1,34 +1,30 @@
+local dapBuddy = { "Pocco81/dap-buddy.nvim", branch = "dev" } -- use branch dev to use the dap installation. as branch master has some breaking changes
+
 return {
   {
     "mfussenegger/nvim-dap",
-    event = "VeryLazy",
     dependencies = {
       "rcarriga/nvim-dap-ui",
       "leoluz/nvim-dap-go",
-      "Pocco81/dap-buddy.nvim",
+      dapBuddy,
       "theHamsta/nvim-dap-virtual-text",
       "nvim-telescope/telescope-dap.nvim",
     },
     config = function()
       require("config.dap").setup()
     end,
-    -- cmd = "require'dap'.continue()" -- make it start when clicking the command for starting a dap
+    event = "VeryLazy", -- will lazyload dap with no notify error
+    -- using cmd below has some drawbacks. there will a error notify about the plugins
+    -- however, the plugin can still be used normally
+    -- cmd = "require'dap'.continue()", -- make it start when clicking the command for starting a dap
   },
-  { "theHamsta/nvim-dap-virtual-text", event = "VeryLazy" },
-  { "nvim-telescope/telescope-dap.nvim", event = "VeryLazy" },
-  { "Pocco81/dap-buddy.nvim", branch = "dev", event = "VeryLazy" },
-  { "leoluz/nvim-dap-go", event = "VeryLazy" },
-  { "rcarriga/nvim-dap-ui", event = "VeryLazy" },
+
+  -- update neodev to have library for nvim-dap-ui
   {
     "folke/neodev.nvim",
     event = "VeryLazy",
     opts = {
       library = { plugins = { "nvim-dap-ui" }, types = true },
     },
-    -- config = function()
-    --   require("neodev").setup({
-    --     library = { plugins = { "nvim-dap-ui" }, types = true },
-    --   })
-    -- end,
   },
 }

@@ -4,7 +4,8 @@
 local M = {}
 
 M.options = {
-  go_gopls_enabled = 0, --NOTE: disable to use gopls from vim lsp only. lsp and vim-go produce double gopls
+  -- disabling gopls from vim-go will not disable other function such as "vaf" "f" stands for func and will visual block entire func of go
+  go_gopls_enabled = 0, --NOTE: disable to use gopls from vim lsp only. lsp and vim-go produce double gopls on memory.
 }
 
 M.setup = function()

@@ -2,6 +2,13 @@
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
 
+-- NOTE: put the delete keymaps from the default lazymap keymaps here before overwrite it
+-- this is especially usefull if the keymaps will be overwrite by a prefix
+local del = vim.keymap.del
+del("n", "<leader>l")
+del("n", "<leader>xl")
+del("n", "<leader>xq")
+
 local function map(mode, lhs, rhs, opts)
   local keys = require("lazy.core.handler").handlers.keys
   ---@cast keys LazyKeysHandler
@@ -33,11 +40,18 @@ map("n", "C", '"_C', opt)
 map("v", "C", '"_C', opt)
 
 -- define which-key below
-local wk = require("which-key") -- pcall not working?
+local status_ok, wk = pcall(require, "which-key")
+if not status_ok then
+  print("which-key is nil")
+  return
+end
+
+-- lsp. the other keymaps are define in plugin lspconfig
+wk.register({ ["<leader>l"] = { name = "+Lsp" } })
 
 -- dap
 wk.register({ ["<leader>d"] = { name = "+Debug" } })
-map("n", "<leader>ds", "<cmd>lua require'dap'.continue()<cr>", { desc = "Start" })
+map("n", "<leader>ds", "<cmd>lua require'dap'.continue()<cr>", { desc = "Start Debugger" })
 map("n", "<leader>dR", "<cmd>lua require'dap'.run_to_cursor()<cr>", { desc = "Run to Cursor" })
 map("n", "<leader>dE", "<cmd>lua require'dapui'.eval(vim.fn.input '[Expression] > ')<cr>", { desc = "Evaluate Input" })
 map(
@@ -80,43 +94,15 @@ map(
 
 map("n", "<leader>sx", require("telescope.builtin").resume, { noremap = true, silent = true, desc = "Resume" })
 
-wk.register({ ["<leader>c"] = { name = "+Code / Lsp" } })
-
--- map("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<cr>", { desc = "Code Action" })
-map("n", "<leader>cd", "<cmd>Telescope diagnostics bufnr=0 theme=get_ivy<cr>", { desc = "Buffer Diagnostics" })
-map("n", "<leader>cD", "<cmd>Telescope diagnostics<cr>", { desc = "Diagnostics" })
-map("n", "<leader>cf", "<cmd>require('lvim.lsp.utils').format", { desc = "Format" })
---   f = { , "Format" },
---   i = { "<cmd>LspInfo<cr>", "Info" },
---   I = { "<cmd>Mason<cr>", "Mason Info" },
---   j = {
---     vim.diagnostic.goto_next,
---     "Next Diagnostic",
---   },
---   k = {
---     vim.diagnostic.goto_prev,
---     "Prev Diagnostic",
---   },
---   l = { vim.lsp.codelens.run, "CodeLens Action" },
---   q = { vim.diagnostic.setloclist, "Quickfix" },
---   r = { vim.lsp.buf.rename, "Rename" },
---   s = { "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols" },
---   S = {
---     "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
---     "Workspace Symbols",
---   },
---   e = { "<cmd>Telescope quickfix<cr>", "Telescope Quickfix" },
--- },
-
-wk.register({ ["<leader>cg"] = { name = "+vim-go" } })
-
-map("n", "<leader>cgs", "<cmd>GoFillStruct<cr>", { desc = "Go Fill Struct" })
-map("n", "<leader>cgt", "<cmd>GoAddTags<cr>", { desc = "Go Add Tags" })
-map("n", "<leader>cgT", "<cmd>GoTest<cr>", { desc = "Go Test Function" })
-map("n", "<leader>cge", "<cmd>GoIfErr<cr>", { desc = "Go Auto Generate if err" })
+-- vim-go
+wk.register({ ["<leader>lg"] = { name = "+Vim-Go" } })
+map("n", "<leader>lgs", "<cmd>GoFillStruct<cr>", { desc = "Go Fill Struct" })
+map("n", "<leader>lgt", "<cmd>GoAddTags<cr>", { desc = "Go Add Tags" })
+map("n", "<leader>lgT", "<cmd>GoTest<cr>", { desc = "Go Test Function" })
+map("n", "<leader>lge", "<cmd>GoIfErr<cr>", { desc = "Go Auto Generate if err" })
 
 -- lazy
--- map("n", "<leader>L", "<cmd>:Lazy<cr>", { desc = "Lazy" })
+map("n", "<leader>L", "<cmd>:Lazy<cr>", { desc = "Lazy" })
 
 -- harpoon
 wk.register({ ["<leader>h"] = { name = "+Harpoon" } })
