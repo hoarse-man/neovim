@@ -75,11 +75,15 @@ return {
         harpoon = true,
         neotree = true,
         treesitter = true,
+        treesitter_context = true,
         leap = true,
         which_key = true,
-        treesitter_context = true,
-        lsp_trouble = true,
-        -- Special = true,
+        lsp_trouble = true, -- trouble.nvim
+        dap = true,
+        noice = true,
+        mini = true,
+        -- special = true,
+
         -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
       },
     })
