@@ -2,5 +2,5 @@
 
 return {
   { "theprimeagen/harpoon", event = "VeryLazy" },
-  { "nvim-treesitter/nvim-treesitter-context" }, -- cannot use the plugin when it uses event = "VeryLazy"
+  -- { "nvim-treesitter/nvim-treesitter-context" }, -- cannot use the plugin when it uses event = "VeryLazy"
 }

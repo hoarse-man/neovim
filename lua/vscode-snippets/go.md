@@ -1,6 +1,7 @@
 # go language vscode style snippet notes
 
 > use the note below to create snippet. current neovim uses non comment json, so the go.md is created
+
 ```
 	/* //? copy below and use '' only. as go doesnt often use '' only when using rune. paste it inside "body" like example below
     [

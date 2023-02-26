@@ -10,7 +10,7 @@ return {
         mappings = {
           ["<space>"] = "none",
 
-          -- to make the same behaviour as nvim-tree
+          -- to make the same behaviour as nvim-tree in lunarvim
           h = function(state)
             local node = state.tree:get_node()
             if (node.type == "directory" or node:has_children()) and node:is_expanded() then
@@ -20,6 +20,7 @@ return {
             end
           end,
           l = "open",
+          ["/"] = "none", -- disable native filter of neo-tree. to use vim search instead
         },
       },
     },

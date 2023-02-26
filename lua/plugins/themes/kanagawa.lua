@@ -2,7 +2,9 @@ local myColor = {
   -- fujiWhite = "#40E0D0", -- variable
   fujiGray = "#4d4b49", -- comments
   oniViolet = "#BF026D", -- func, defer etc
-  sakuraPink = "#40E0D0", -- number
+  sakuraPink = "#f27e1f", -- number
+  springBlue = "#b9fad7", -- nil, require, builtin func, and indent line
+  peachRed = "#aa58ed", -- return and exception handling
 }
 
 return {

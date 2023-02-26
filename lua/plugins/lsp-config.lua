@@ -10,13 +10,17 @@ return {
     -- -- disable a keymap
     -- keys[#keys + 1] = { "K", false }
     keys[#keys + 1] = { "<leader>c", false } -- NOTE: the whole "c" for lspconfig keymaps. will use "l" below as the new keymaps
+    keys[#keys + 1] = { "<leader>cl", false }
+    keys[#keys + 1] = { "<leader>ca", false }
+    keys[#keys + 1] = { "<leader>cd", false }
+    keys[#keys + 1] = { "<leader>cf", false }
+    keys[#keys + 1] = { "<leader>cm", false }
+    keys[#keys + 1] = { "<leader>cr", false }
 
     -- -- add a keymap
     keys[#keys + 1] = { "<leader>li", "<cmd>LspInfo<cr>", desc = "Lsp Info" }
     keys[#keys + 1] = { "<leader>lI", "<cmd>Mason<cr>", desc = "Mason Info" }
-
-    -- keys[#keys + 1] = { "<leader>lq", vim.diagnostic.setloclist, desc = "Quickfix" }
-    -- keys[#keys + 1] = { "<leader>lQ", "<cmd>Telescope quickfix<cr>", desc = "Telescope Quickfix" }
+    keys[#keys + 1] = { "<leader>lR", "<cmd>LspRestart<CR>", desc = "Restart Lsp" }
 
     -- NOTE: not working
     -- local format = require("lazyvim.plugins.lsp.format").format
@@ -25,27 +29,14 @@ return {
 
     keys[#keys + 1] = { "gl", vim.diagnostic.open_float, desc = "Line Diagnostics" }
 
-    keys[#keys + 1] = {
-      "<leader>ld",
-      "<cmd>Telescope diagnostics bufnr=0 theme=get_ivy<cr>",
-      desc = "Buffer Diagnostics",
-    }
+    local bufer_diagnostic = "<cmd>Telescope diagnostics bufnr=0 theme=get_ivy<cr>"
+    keys[#keys + 1] = { "<leader>ld", bufer_diagnostic, desc = "Buffer Diagnostics" }
 
-    keys[#keys + 1] = {
-      "<leader>lD",
-      "<cmd>Telescope diagnostics<cr>",
-      desc = "Workspace Diagnostics",
-    }
+    local workspace_diagnostic = "<cmd>Telescope diagnostics<cr>"
+    keys[#keys + 1] = { "<leader>lD", workspace_diagnostic, desc = "Workspace Diagnostics" }
 
-    keys[#keys + 1] = {
-      "<leader>la",
-      vim.lsp.buf.code_action,
-      desc = "Code Action",
-      mode = { "n", "v" },
-      has = "codeAction",
-    }
-
-    -- keys[#keys + 1] = { "<leader>lr", vim.lsp.buf.rename, desc = "Rename var" }
+    keys[#keys + 1] =
+      { "<leader>la", vim.lsp.buf.code_action, desc = "Code Action", mode = { "n", "v" }, has = "codeAction" }
 
     if require("lazyvim.util").has("inc-rename.nvim") then
       keys[#keys + 1] = {

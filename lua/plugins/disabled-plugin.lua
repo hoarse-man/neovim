@@ -1,8 +1,4 @@
--- all of my persnoal plugin that is disabled to prevent adding
-if true then
-  return {}
-end
-
+-- all disabled plugin
 return {
   {
     "tummetott/reticle.nvim",
@@ -44,5 +40,17 @@ return {
         },
       })
     end,
+  },
+
+  {
+    "folke/trouble.nvim",
+    enabled = false,
+    -- keys = function()
+    --   return {}
+    -- end,
+  },
+  {
+    "lewis6991/gitsigns.nvim",
+    enabled = false,
   },
 }

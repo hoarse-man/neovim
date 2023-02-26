@@ -1,5 +1,6 @@
 local vscode_path = "~/.config/nvim/lua/vscode-snippets"
 local snipmate_path = "~/.config/nvim/lua/snippets"
+-- community driven of all programing language snippets
 local honza_snippets_path = "~/.local/share/nvim/lazy/vim-snippets/snippets"
 
 local friendly_snippets = {

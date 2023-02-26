@@ -1,8 +1,12 @@
 return {
-  { "p00f/nvim-ts-rainbow" }, -- the original rainbow
+  -- { "p00f/nvim-ts-rainbow" }, -- the original rainbow still works fine
   -- { "HiPhish/nvim-ts-rainbow2" },
+  { "nvim-treesitter/nvim-treesitter-context" }, -- no lazy load as it will not works
   {
     "nvim-treesitter/nvim-treesitter",
+    dependencies = {
+      { "p00f/nvim-ts-rainbow" }, -- the original rainbow still works fine
+    },
     opts = {
       rainbow = {
         enable = true,

@@ -3,6 +3,7 @@
 -- Add any additional options here
 
 local opt = vim.opt
+local api = vim.api
 
 -- opt.winbar = "%=%m %f"
 opt.cursorline = true
@@ -14,3 +15,30 @@ opt.writebackup = false -- if a file is being edited by another program (or was 
 opt.swapfile = false -- creates a swapfile (i hate this thing, MUST BE FALSE!!!)
 opt.hlsearch = true -- highlight all matches on previous search pattern
 -- opt.showmode = false -- we don't need to see things like -- INSERT -- anymore
+
+-- The below settings make Leap's highlighting closer to what you've been
+-- used to in Lightspeed.
+
+-- make leap to have lightspeed highlight.
+-- NOTE: this is enabled automatically in catpuccin theme but not in kanaqawa
+api.nvim_set_hl(0, "LeapBackdrop", { link = "Comment" }) -- or some grey
+api.nvim_set_hl(0, "LeapMatch", {
+  -- For light themes, set to 'black' or similar.
+  fg = "white",
+  bold = true,
+  nocombine = true,
+})
+-- Of course, specify some nicer shades instead of the default "red" and "blue".
+api.nvim_set_hl(0, "LeapLabelPrimary", {
+  fg = "red",
+  bold = true,
+  nocombine = true,
+})
+api.nvim_set_hl(0, "LeapLabelSecondary", {
+  fg = "blue",
+  bold = true,
+  nocombine = true,
+})
+
+-- Try it without this setting first, you might find you don't even miss it.
+-- require('leap').opts.highlight_unlabeled_phase_one_targets = true

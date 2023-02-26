@@ -22,8 +22,14 @@ local opt = { noremap = true, silent = true }
 
 map("i", "jk", "<esc>l", opt) -- added l when escaped to normal mode as to not make the cursor move back 1 line
 
--- save global path to "p"
-map("n", "cp", ':let @" = expand("%:p")<cr>""', { noremap = true, silent = true, desc = "Copy path to register" }) -- added l when escaped to normal mode as to not make the cursor move back 1 line
+-- save global path to "p" and save to clipboard
+map(
+  "n",
+  "cp",
+  'o<esc>:let @" = expand("%:p")<cr>""pVxk',
+  { noremap = true, silent = true, desc = "Copy path to register" }
+) -- added l when escaped to normal mode as to not make the cursor move back 1 line
+-- map("n", "cp", ':let @" = expand("%:p")<cr>""', { noremap = true, silent = true, desc = "Copy path to register" }) -- added l when escaped to normal mode as to not make the cursor move back 1 line
 
 -- NOTE: it should be "_d so uses '' to make the string, else the keymap will not be working
 -- "_* will not save to clipboard.
@@ -47,10 +53,10 @@ if not status_ok then
 end
 
 -- lsp. the other keymaps are define in plugin lspconfig
-wk.register({ ["<leader>l"] = { name = "+Lsp" } })
+wk.register({ ["<leader>l"] = { name = "+lsp" } })
 
 -- dap
-wk.register({ ["<leader>d"] = { name = "+Debug" } })
+wk.register({ ["<leader>d"] = { name = "+debug" } })
 map("n", "<leader>ds", "<cmd>lua require'dap'.continue()<cr>", { desc = "Start Debugger" })
 map("n", "<leader>dR", "<cmd>lua require'dap'.run_to_cursor()<cr>", { desc = "Run to Cursor" })
 map("n", "<leader>dE", "<cmd>lua require'dapui'.eval(vim.fn.input '[Expression] > ')<cr>", { desc = "Evaluate Input" })
@@ -95,17 +101,22 @@ map(
 map("n", "<leader>sx", require("telescope.builtin").resume, { noremap = true, silent = true, desc = "Resume" })
 
 -- vim-go
-wk.register({ ["<leader>lg"] = { name = "+Vim-Go" } })
+wk.register({ ["<leader>lg"] = { name = "+go-nvim" } })
 map("n", "<leader>lgs", "<cmd>GoFillStruct<cr>", { desc = "Go Fill Struct" })
-map("n", "<leader>lgt", "<cmd>GoAddTags<cr>", { desc = "Go Add Tags" })
-map("n", "<leader>lgT", "<cmd>GoTest<cr>", { desc = "Go Test Function" })
-map("n", "<leader>lge", "<cmd>GoIfErr<cr>", { desc = "Go Auto Generate if err" })
+map("n", "<leader>lgf", "<cmd>GoFillSwitch<cr>", { desc = "Go Fill Switch" })
+map("n", "<leader>lgt", "<cmd>GoAddTag<cr>", { desc = "Go Add Tags" })
+map("n", "<leader>lgr", "<cmd>GoRmTag<cr>", { desc = "Go Remove Tags" })
+-- map("n", "<leader>lgT", "<cmd>GoTest<cr>", { desc = "Go Test Function" })
+map("n", "<leader>lge", "<cmd>GoIfErr<cr>", { desc = "Go Auto Generate 'if err'" })
+map("n", "<leader>lgc", "<cmd>GoCmt<cr>", { desc = "Go Generate Func Comments" })
+map("n", "<leader>lgm", "<cmd>Gomvp<cr>", { desc = "Go Rename Module name" })
+map("n", "<leader>lgm", "<cmd>GoFixPlurals<cr>", { desc = "Go Fix Redundant Func Params" }) -- not working?
 
 -- lazy
 map("n", "<leader>L", "<cmd>:Lazy<cr>", { desc = "Lazy" })
 
 -- harpoon
-wk.register({ ["<leader>h"] = { name = "+Harpoon" } })
+wk.register({ ["<leader>h"] = { name = "+harpoon" } })
 map("n", "<leader>hm", "<cmd>lua require('harpoon.mark').add_file()<cr>", { desc = "Mark for Harpoon" })
 map("n", "<leader>ht", "<cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>", { desc = "Toggle Quick Menu" })
 map("n", "<leader>hn", "<cmd>lua require('harpoon.ui').nav_next()<cr>", { desc = "Go to next" })
@@ -113,4 +124,4 @@ map("n", "<leader>hp", "<cmd>lua require('harpoon.ui').nav_prev<cr>", { desc = "
 
 -- other keymaps
 map("n", "<leader>H", "<cmd>nohlsearch<CR>", { desc = "No Highlight" })
-map("n", "<leader>r", "<cmd>LspRestart<CR>", { desc = "Restart Lsp" })
+map("n", "<leader>st", "<cmd>TodoTelescope<CR>", { desc = "Todo Telescope" })
