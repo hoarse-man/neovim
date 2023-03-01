@@ -93,7 +93,7 @@ map(
 -- open other float_element
 map(
   "n",
-  "<leader>do",
+  "<leader>dO",
   '<cmd>lua require("dapui").float_element(nil, { width = 90, height = 100, enter = true, position = "center" })<cr>',
   { desc = "Toggle Other Floating Element" }
 )
@@ -125,3 +125,7 @@ map("n", "<leader>hp", "<cmd>lua require('harpoon.ui').nav_prev<cr>", { desc = "
 -- other keymaps
 map("n", "<leader>H", "<cmd>nohlsearch<CR>", { desc = "No Highlight" })
 map("n", "<leader>st", "<cmd>TodoTelescope<CR>", { desc = "Todo Telescope" })
+
+-- comments (why uses <Plug> = to avoid go to normal mode)
+map("v", "<leader>/", "<Plug>(comment_toggle_linewise_visual)", { desc = "Comment toggle linewise (visual)" })
+map("n", "<leader>/", "<Plug>(comment_toggle_linewise_current)", { desc = "Comment toggle current line" })

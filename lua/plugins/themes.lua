@@ -1,8 +1,8 @@
 return {
   { require("plugins.themes.kanagawa") },
-  { require("plugins.themes.catppuccin") },
-  { require("plugins.themes.tokyo-night") },
-  { require("plugins.themes.nightfox") },
+  -- { require("plugins.themes.catppuccin") },
+  -- { require("plugins.themes.tokyo-night") },
+  -- { require("plugins.themes.nightfox") },
   -- { require("plugins.themes.vscode") },
   -- { "ellisonleao/gruvbox.nvim" },
 
@@ -10,7 +10,7 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "kanagawa",
+      colorscheme = "kanagawa", -- default theme
       -- colorscheme = "vscode",
       -- colorscheme = "catppuccin",
       -- colorscheme = "tokyonight",
