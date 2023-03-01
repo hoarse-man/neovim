@@ -6,8 +6,8 @@ local honza_snippets_path = "~/.local/share/nvim/lazy/vim-snippets/snippets"
 local friendly_snippets = {
   "rafamadriz/friendly-snippets",
   config = function()
-    require("luasnip.loaders.from_vscode").lazy_load({ paths = vscode_path })
     require("luasnip.loaders.from_snipmate").lazy_load({ paths = snipmate_path })
+    require("luasnip.loaders.from_vscode").lazy_load({ paths = vscode_path })
     require("luasnip.loaders.from_snipmate").lazy_load({ paths = honza_snippets_path })
   end,
 }
