@@ -7,6 +7,7 @@ local autocmd = vim.api.nvim_create_autocmd
 local augroup = vim.api.nvim_create_augroup
 local yank_group = augroup("HighlightYank", {})
 
+-- make yank animation to be blazingly fast
 autocmd("TextYankPost", {
   group = yank_group,
   pattern = "*",
@@ -19,7 +20,7 @@ autocmd("TextYankPost", {
 })
 
 -- Run gofmt + goimport on save - go.nvim
-local format_sync_grp = vim.api.nvim_create_augroup("GoImport", {})
+local format_sync_grp = augroup("GoImport", {})
 autocmd("BufWritePre", {
   pattern = "*.go",
   callback = function()
