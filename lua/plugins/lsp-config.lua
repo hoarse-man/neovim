@@ -12,6 +12,7 @@ return {
     keys[#keys + 1] = { "<leader>c", false } -- NOTE: the whole "c" for lspconfig keymaps. will use "l" below as the new keymaps
     keys[#keys + 1] = { "<leader>cl", false }
     keys[#keys + 1] = { "<leader>ca", false, mode = { "n", "v" }, has = "codeAction" }
+    keys[#keys + 1] = { "<leader>cA", false, mode = { "n", "v" }, has = "codeAction" }
     keys[#keys + 1] = { "<leader>cd", false }
     keys[#keys + 1] = { "<leader>cf", false }
     keys[#keys + 1] = { "<leader>cm", false }

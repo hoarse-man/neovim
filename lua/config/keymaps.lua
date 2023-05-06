@@ -100,13 +100,14 @@ map(
 
 map("n", "<leader>sx", require("telescope.builtin").resume, { noremap = true, silent = true, desc = "Resume" })
 
--- vim-go
+-- go-nvim
 wk.register({ ["<leader>lg"] = { name = "+go-nvim" } })
 map("n", "<leader>lgs", "<cmd>GoFillStruct<cr>", { desc = "Go Fill Struct" })
 map("n", "<leader>lgf", "<cmd>GoFillSwitch<cr>", { desc = "Go Fill Switch" })
 map("n", "<leader>lgt", "<cmd>GoAddTag<cr>", { desc = "Go Add Tags" })
 map("n", "<leader>lgr", "<cmd>GoRmTag<cr>", { desc = "Go Remove Tags" })
--- map("n", "<leader>lgT", "<cmd>GoTest<cr>", { desc = "Go Test Function" })
+map("n", "<leader>lgT", "<cmd>GoTestFun<cr>", { desc = "Go Test a Function" })
+map("n", "<leader>lgA", "<cmd>GoTestPkg<cr>", { desc = "Go Test Package" })
 map("n", "<leader>lge", "<cmd>GoIfErr<cr>", { desc = "Go Auto Generate 'if err'" })
 map("n", "<leader>lgc", "<cmd>GoCmt<cr>", { desc = "Go Generate Func Comments" })
 map("n", "<leader>lgm", "<cmd>Gomvp<cr>", { desc = "Go Rename Module name" })

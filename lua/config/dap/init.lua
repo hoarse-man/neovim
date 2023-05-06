@@ -40,18 +40,18 @@ local function configure_exts()
   local dap, dapui = require("dap"), require("dapui")
   dapui.setup({}) -- use default
   dap.listeners.after.event_initialized["dapui_config"] = function()
-    -- dapui.open()
-    dap.repl.toggle()
+    dapui.open()
+    -- dap.repl.toggle() -- NOTE: now this is buggy, the symbol not working unless open the main UI and open this ui again to work
     -- do not use full UI as it is buggy as hell.
     -- use dap.repl.toggle() to toggle on and of when starting and exiting dap
   end
   dap.listeners.before.event_terminated["dapui_config"] = function()
-    -- dapui.close()
-    dap.repl.toggle()
+    dapui.close()
+    -- dap.repl.toggle()
   end
   dap.listeners.before.event_exited["dapui_config"] = function()
-    -- dapui.close()
-    dap.repl.toggle()
+    dapui.close()
+    -- dap.repl.toggle()
   end
 end
 

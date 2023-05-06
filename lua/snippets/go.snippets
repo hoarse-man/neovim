@@ -5,8 +5,17 @@
 snippet del "comment FIX: TO DELETE"
 	// FIX: DELETE LATER
 
-snippet todo "comment TODO"
+snippet fix "comment FIX:"
+	// FIX: ${1}
+
+snippet todo "comment todo"
 	// TODO: ${1}
 
-snippet l "go log"
-  log.Prinln(${1}) // FIX: DELETE LATER
+snippet note "comment note"
+	// NOTE: ${1}
+
+snippet lo "go log but delete later"
+  log.Println(${1}) // FIX: DELETE LATER
+
+snippet log "go log.Prinlt"
+  log.Println(${1})

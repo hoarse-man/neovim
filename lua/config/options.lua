@@ -16,6 +16,9 @@ opt.swapfile = false -- creates a swapfile (i hate this thing, MUST BE FALSE!!!)
 opt.hlsearch = true -- highlight all matches on previous search pattern
 -- opt.showmode = false -- we don't need to see things like -- INSERT -- anymore
 
+-- opt.list = true
+-- opt.listchars:append("space:⋅")
+
 -- The below settings make Leap's highlighting closer to what you've been
 -- used to in Lightspeed.
 
